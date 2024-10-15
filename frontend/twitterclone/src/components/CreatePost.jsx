@@ -22,7 +22,7 @@ const CreatePost = () => {
                     </div>
                     <div className='flex items-center justify-between p-4 border-b border-gray-300'>
                         <div>
-                            <CiImageOn/>
+                            <CiImageOn size='24px'/>
                         </div>
                         <button className='bg-[#1D9BF0] px-4 py-1 text-lg text-white border-none rounded-full'>Post</button>
                     </div>
