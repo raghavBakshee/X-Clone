@@ -2,7 +2,11 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import { IoMdArrowBack } from 'react-icons/io'
 import Avatar from 'react-avatar';
+import useGetProfile from '../hooks/useGetProfile'
+import { useSelector } from 'react-redux'
 const Profile = () => {
+  const {user} = useSelector(store => store.user)
+  useGetProfile(user._id);
   return (
     <div className="h-[50%] border-l border-r border-gray-200">
       <div className="flex items-center py-2">
