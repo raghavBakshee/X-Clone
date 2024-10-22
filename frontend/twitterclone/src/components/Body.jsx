@@ -1,22 +1,23 @@
-import React from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Home from './Home'
-import Login from './Login'
-import Feed from './Feed'
-import Profile from './Profile'
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from './Login';
+import Home from './Home';
+import Feed from './Feed';
+import Profile from './Profile';
+
 const Body = () => {
     const appRouter = createBrowserRouter([
         {
             path: "/",
-            element: <Home />,
-            children: [
+            element: <Home/>,
+            children:[
                 {
-                    path: "/",
-                    element: <Feed />
+                    path:"/",
+                    element:<Feed/>
                 },
                 {
-                    path: "/profile",
-                    element: <Profile />
+                    path:"/profile/:id",
+                    element:<Profile/>
                 }
             ]
         },
@@ -28,8 +29,6 @@ const Body = () => {
     return (
         <div>
             <RouterProvider router={appRouter} />
-
-
         </div>
     )
 }

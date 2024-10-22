@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import axios from "axios"
-import {USER_API_END_POINT} from '../utils/constants.js'
-import { toast } from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getUser } from '../redux/userSlice.js';
+import axios from "axios";
+import { USER_API_END_POINT } from "../utils/constants";
+import toast from "react-hot-toast";
+import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import { getUser } from '../redux/userSlice';
+
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [name, setName] = useState("");
@@ -14,47 +15,49 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const loginSignupHandler = () => {
-    setIsLogin(!isLogin);
-  }
-
   const submitHandler = async (e) => {
     e.preventDefault();
-    // console.log(name, username, email, password);
-    if(isLogin){
-      // login logic
+    if (isLogin) {
+      // login
       try {
-        const res = await axios.post(`${USER_API_END_POINT}/login`, {email, password})
-        console.log(res)
-        dispatch(getUser(res?.data?.user))
-        if(res.data.success){
-          navigate("/");  
-          toast.success(res.data.message)
-        }
-      } catch (error) {
-        toast.error(error.response.data.message)
-        console.log(error);
-      }
-    }
-    else{
-      // signup logic
-      try {
-        const res = await axios.post(`${USER_API_END_POINT}/register`, {name, username, email, password}, {
-          headers:{
+        const res = await axios.post(`${USER_API_END_POINT}/login`, { email, password }, {
+          headers: {
             'Content-Type': "application/json"
           },
           withCredentials: true
-        })
+        }); 
+        dispatch(getUser(res?.data?.user));
         if(res.data.success){
-          setIsLogin(true)
-          toast.success(res.data.message)
+          navigate("/");
+          toast.success(res.data.message);
         }
-        
       } catch (error) {
+        toast.success(error.response.data.message);
+        console.log(error);
+      }
+    } else {
+      // signup
+      try {
+        const res = await axios.post(`${USER_API_END_POINT}/register`, { name, username, email, password }, {
+          headers: {
+            'Content-Type': "application/json"
+          },
+          withCredentials: true
+        }); 
+        if(res.data.success){
+          setIsLogin(true);
+          toast.success(res.data.message);
+        }
+      } catch (error) {
+        toast.success(error.response.data.message);
         console.log(error);
       }
     }
-    
+  }
+
+
+  const loginSignupHandler = () => {
+    setIsLogin(!isLogin);
   }
 
   return (

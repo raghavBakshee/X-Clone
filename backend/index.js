@@ -16,17 +16,18 @@ const app = express();
 app.use(express.urlencoded({
     extended: true
 }))
+app.use(express.json());
+app.use(cookieParser());
 const corsOptions = {
     origin:"http://localhost:3000",
     credentials: true
 }
 app.use(cors(corsOptions))
-app.use(express.json());
-app.use(cookieParser());
+
 
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/tweet", tweetRoute);
 
 app.listen(PORT_ENV, () => {
-    console.log(`Server listens at port ${PORT_ENV}`)
+   
 })
