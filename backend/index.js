@@ -6,9 +6,7 @@ import userRoute from "./routes/userRoute.js"
 import tweetRoute from "./routes/tweetRoute.js"
 import cors from 'cors'
 import path from "path"
-dotenv.config({
-    path: ".env"
-})
+dotenv.config()
 const PORT_ENV = process.env.PORT || 3001;
 dbConnection();
 const app = express();
